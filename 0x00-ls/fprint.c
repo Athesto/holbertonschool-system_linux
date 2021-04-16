@@ -11,10 +11,10 @@ void print(pre_t data, flag_t myflags, struct dirent **array)
 	char *filename;
 	char buffer[1024];
 
+	if (data.argc > 1)
+		printf("%s:\n", data.path);
 	if (myflags.l)
 	{
-		if (data.argc > 1)
-			printf("%s:\n", data.path);
 		printf("total %d\n", data.blocks / 2);
 	}
 
