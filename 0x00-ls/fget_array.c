@@ -29,9 +29,12 @@ struct dirent **get_array(pre_t data, flag_t my_flags, char *path)
 			while ((entry = readdir(dir)) != NULL)
 			{
 				filename = entry->d_name;
-				isAlmost = my_flags.A &&\
-						   _strcmp(filename, ".") &&\
-						   _strcmp(filename, "..");
+				isAlmost =
+					(
+						my_flags.A &&
+						_strcmp(filename, ".") &&
+						_strcmp(filename, "..")
+					);
 
 				if (my_flags.a || isAlmost || filename[0] != '.')
 				{
