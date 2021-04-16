@@ -77,7 +77,7 @@ int test_0(char **argv)
 					if (myflags.l)
 						long_format(pre, buffer, tmp);
 					else
-						sprintf(buffer, "%s", tmp);
+						_strcpy(buffer, tmp);
 					printf("%s\n", buffer);
 					break;
 

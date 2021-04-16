@@ -23,8 +23,10 @@ char *long_format(pre_t data, char *buffer, char *filename)
 	char type;
 	char buffer_filename[80];
 
-	sprintf(buffer_filename, "%s/%s", data.path, filename);
-
+	if (data.path)
+		sprintf(buffer_filename, "%s/%s", data.path, filename);
+	else
+		_strcpy(buffer_filename, filename);
 	lstat(buffer_filename, &mystat);
 	pwd_info = getpwuid(mystat.st_uid);
 	grp_info = getgrgid(mystat.st_gid);

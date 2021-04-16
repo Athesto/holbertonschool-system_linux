@@ -60,6 +60,7 @@ struct dirent **get_array(pre_t, flag_t, char *);
 void print(pre_t, flag_t, struct dirent **);
 int numlen(int);
 char *long_format(pre_t data, char *, char *);
+char *_strcpy(char *, char *);
 
 
 #endif /* _HSL_TEST_H_ */
