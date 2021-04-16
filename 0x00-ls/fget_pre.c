@@ -36,7 +36,7 @@ int get_pre(pre_t *data, flag_t my_flags, char *path)
 		if (my_flags.a || isAlmost || file_name[0] != '.')
 		{
 			len++;
-			sprintf(buffer, "%s%s", path, file_name);
+			sprintf(buffer, "%s/%s", path, file_name);
 			lstat(buffer, &mystat);
 			total_blocks += mystat.st_blocks;
 			if (mystat.st_size > max_size)
