@@ -33,7 +33,10 @@ void print(pre_t data, flag_t myflags, struct dirent **array)
 		}
 		else
 		{
-			printf("%s ", filename);
+			if (i > 0)
+				printf(" %s", filename);
+			else
+				printf("%s", filename);
 		}
 	}
 	if (!myflags.l && !myflags.one)
