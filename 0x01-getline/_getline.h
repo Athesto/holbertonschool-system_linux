@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define READ_SIZE 10240
+#define READ_SIZE 102400
 char *_getline(const int fd);
 
 #endif /* _GETLINE_H_ */
