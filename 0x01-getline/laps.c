@@ -18,6 +18,8 @@ void race_state(int *id, size_t size)
 		free_list(head);
 		return;
 	}
+	if (id == NULL)
+		return;
 
 
 	for (i = 0; i < size; i++)
@@ -79,10 +81,10 @@ car_t *add_node(car_t **head, int id)
 		return (NULL);
 	node->id = id;
 	node->lap = 0;
-	node->next = NULL;
 
-	if (*head == NULL)
+	if (*head == NULL || (*head)->id > id)
 	{
+		node->next = *head;
 		*head = node;
 		return (node);
 	}
