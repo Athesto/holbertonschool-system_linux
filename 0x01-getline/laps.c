@@ -12,7 +12,8 @@ void race_state(int *id, size_t size)
 	car_t *node;
 	size_t i;
 
-	if (!id)
+
+	if (size == 0)
 	{
 		free_list(head);
 		return;

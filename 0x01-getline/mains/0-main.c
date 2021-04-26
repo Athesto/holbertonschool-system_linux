@@ -1,6 +1,8 @@
 #include "../laps.h"
 
 void test_0();
+void test_1();
+void test_2();
 /**
  * main - entry point.
  *
@@ -8,9 +10,27 @@ void test_0();
  */
 int main()
 {
+	/* test_1(); */
+	/* test_2(); */
 	test_0();
 
 	return (0);
+}
+
+void test_2()
+{
+	int inds1[3] = {1,2,3};
+	race_state(NULL, 3);
+	race_state(inds1, 0);
+
+}
+
+void test_1()
+{
+	int inds1[3] = {1,2,3};
+	race_state(inds1, 3);
+	race_state(inds1, 0);
+
 }
 
 
