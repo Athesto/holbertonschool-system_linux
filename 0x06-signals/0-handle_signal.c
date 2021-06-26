@@ -18,5 +18,5 @@ int handle_signal(void)
 	signal(SIGINT, response);
 	signal(SIGTSTP, response);
 	signal(SIGTERM, response);
-	return (1);
+	return (0);
 }
