@@ -15,8 +15,7 @@ void response(int code)
  */
 int handle_signal(void)
 {
-	signal(SIGINT, response);
-	signal(SIGTSTP, response);
-	signal(SIGTERM, response);
+	if (signal(SIGINT, response) == SIG_ERR)
+		return (-1);
 	return (0);
 }
