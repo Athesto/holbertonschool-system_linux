@@ -6,7 +6,7 @@
  */
 void response(int code)
 {
-	printf("Gotcha! %d\n", code);
+	printf("Gotcha! [%d]\n", code);
 }
 
 /**
