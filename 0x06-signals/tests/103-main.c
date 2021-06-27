@@ -29,7 +29,7 @@ int main(void)
 		0
 	};
 
-	if (_signals_block(signals_to_block) == -1)
+	if (signals_block(signals_to_block) == -1)
 	{
 		fprintf(stderr, "Failed to block signals\n");
 		return (EXIT_FAILURE);

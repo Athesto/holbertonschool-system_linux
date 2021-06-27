@@ -33,7 +33,7 @@ int main(void)
 		0
 	};
 
-	if (_signals_block(signals) == -1)
+	if (signals_block(signals) == -1)
 	{
 		fprintf(stderr, "Failed to block signals\n");
 		return (EXIT_FAILURE);
@@ -46,7 +46,7 @@ int main(void)
 		return (EXIT_FAILURE);
 	}
 
-	if (_signals_unblock(signals) == -1)
+	if (signals_unblock(signals) == -1)
 	{
 		fprintf(stderr, "Failed to unblock signals\n");
 		return (EXIT_FAILURE);

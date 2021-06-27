@@ -12,22 +12,22 @@
  */
 int main(void)
 {
-    int signals[] = {
-        SIGINT,
-        SIGQUIT,
-        SIGSEGV,
-        SIGTRAP,
-        0
-    };
+	int signals[] = {
+		SIGINT,
+		SIGQUIT,
+		SIGSEGV,
+		SIGTRAP,
+		0
+	};
 
-    if (signals_block(signals) == -1)
-    {
-        fprintf(stderr, "Failed to block signals\n");
-        return (EXIT_FAILURE);
-    }
-    while (98)
-    {
-        sleep(5);
-    }
-    return (EXIT_SUCCESS);
+	if (signals_block(signals) == -1)
+	{
+		fprintf(stderr, "Failed to block signals\n");
+		return (EXIT_FAILURE);
+	}
+	while (98)
+	{
+		sleep(5);
+	}
+	return (EXIT_SUCCESS);
 }

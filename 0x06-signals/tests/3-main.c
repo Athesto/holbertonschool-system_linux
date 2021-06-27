@@ -17,16 +17,21 @@ int main(void)
 {
 	void (*handler)(int);
 	int i;
+	char *msg[] = {
+		"Address of the current handler: %#lx\n",
+		"Address of the 'print_hello' function: %#lx\n",
+		"Address of the current handler: %#lx\n"
+	};
 
 	handler = current_handler_sigaction();
-	printf("Address of the current handler: %#lx\n", (unsigned long int)handler);
+	printf(msg[0], (unsigned long int)handler);
 
 	/* Set 'print_hello()` as the handler for SIGINT */
 	set_print_hello();
 
 	handler = current_handler_sigaction();
-	printf("Address of the 'print_hello' function: %#lx\n", (unsigned long int)&print_hello);
-	printf("Address of the current handler: %#lx\n", (unsigned long int)handler);
+	printf(msg[1], (unsigned long int)&print_hello);
+	printf(msg[2], (unsigned long int)handler);
 
 	for (i = 0; ; i++)
 	{
