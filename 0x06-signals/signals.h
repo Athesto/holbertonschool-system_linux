@@ -4,6 +4,7 @@
 #include <sys/types.h> /* pid_t */
 #include <signal.h> /* signal */
 #include <stdio.h> /* printf */
+#include <stdlib.h> /* EXIT_SUCCESS, EXIT_FAILURE */
 /* #include <unistd.h> */
 
 int handle_signal(void);
