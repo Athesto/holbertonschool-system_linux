@@ -9,7 +9,7 @@ void (*current_handler_signal(void))(int)
 
 	handler = signal(SIGINT, SIG_IGN);
 
-	if (!handler && handler == SIG_ERR)
+	if (!handler || handler == SIG_ERR)
 		return (NULL);
 	return (handler);
 }
