@@ -5,6 +5,7 @@
 #include <signal.h> /* signal */
 #include <stdio.h> /* printf */
 #include <stdlib.h> /* EXIT_SUCCESS, EXIT_FAILURE */
+#include <string.h> /* memset*/
 /* #include <unistd.h> */
 
 typedef void (*handler_t)(int); /* hander_t == pointer to void f(int); */
