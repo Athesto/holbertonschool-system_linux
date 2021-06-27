@@ -18,7 +18,7 @@ int main(void)
 		printf("Failure\n");
 		return (EXIT_FAILURE);
 	}
-	for (i = 0; ; i++)
+	for (i = 0; i < 10 ; i++)
 	{
 		printf("[%d] Wait for it ...\n", i);
 		sleep(1);
