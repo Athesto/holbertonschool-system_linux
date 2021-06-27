@@ -7,6 +7,8 @@
 #include <stdlib.h> /* EXIT_SUCCESS, EXIT_FAILURE */
 /* #include <unistd.h> */
 
+typedef void (*handler_t)(int); /* hander_t == pointer to void f(int); */
+typedef struct sigaction sigaction_t;
 int handle_signal(void);
 void (*current_handler_signal(void))(int);
 int handle_sigaction(void);
