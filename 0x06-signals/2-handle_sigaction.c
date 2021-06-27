@@ -1,5 +1,4 @@
 #include "signals.h"
-#include "string.h"
 
 /**
  * printGotcha - print Gotcha and code
@@ -17,9 +16,8 @@ void printGotcha(int code)
  */
 int handle_sigaction(void)
 {
-	sigaction_t act; /* vagrant is happy with a variable initalized */
+	sigaction_t act = {0}; /* vagrant is happy with a variable initalized */
 
-	memset(&act, 0, sizeof(act));
 	act.sa_handler = printGotcha;
 	return (sigaction(SIGINT, &act, NULL));
 }
