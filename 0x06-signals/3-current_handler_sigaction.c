@@ -7,5 +7,10 @@
  */
 void (*current_handler_sigaction(void))(int)
 {
+	sigaction_t prev;
+
+	memset(&prev, 0, sizeof(prev));
+	if (!sigaction(SIGINT, NULL, &prev))
+		return (prev.sa_handler);
 	return (NULL);
 }
