@@ -5,7 +5,7 @@
  */
 void (*current_handler_signal(void))(int)
 {
-	void (*handler)(int);
+	handler_t handler;
 
 	handler = signal(SIGINT, NULL);
 	signal(SIGINT, handler);
