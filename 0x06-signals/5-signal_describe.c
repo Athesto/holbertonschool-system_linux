@@ -7,12 +7,14 @@
  */
 int main(int argc, char *argv[])
 {
+	char *name;
+
 	if (argc != 2)
 	{
 		printf("Usage: %s <signum>\n", argv[0]);
 		return (EXIT_FAILURE);
 	}
-	printf("%d: %s\n", 1, "Hangup");
-
+	name = strsignal(atoi(argv[1]));
+	printf("%s: %s\n", argv[1], name);
 	return (EXIT_SUCCESS);
 }
