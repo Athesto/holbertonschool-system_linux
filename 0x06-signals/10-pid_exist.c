@@ -1,5 +1,5 @@
 #include <sys/types.h>
-#include <stdio.h>
+#include "signals.h"
 /**
  * pid_exist - tests if a process exists, given its PID
  * @pid: pid number
@@ -8,6 +8,5 @@
  */
 int pid_exist(pid_t pid)
 {
-	printf("%d", pid);
-	return (0);
+	return (!kill(pid, 0));
 }
