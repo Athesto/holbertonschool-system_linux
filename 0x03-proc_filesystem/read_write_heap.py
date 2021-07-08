@@ -9,6 +9,9 @@ if __name__ == "__main__":
         print("use {} pid search_string replace_string".format(argv[0]))
         exit(1)
     [pid, search, replace] = argv[1:]
+    if "" in [pid, search, replace]:
+        print("please use a no empty value")
+        exit(4)
     maps_path = "/proc/{}/maps".format(pid)
     mem_path = "/proc/{}/mem".format(pid)
     heap = {
@@ -33,6 +36,10 @@ if __name__ == "__main__":
     with open(mem_path, 'rb+') as mem:
         mem.seek(heap['start'])
         heap["mem"] = mem.read(heap['end'] - heap['start'])
-        i = heap["mem"].index(bytes(search, "ASCII"))
+        try:
+            i = heap["mem"].index(bytes(search, "ASCII"))
+        except ValueError:
+            print("string not found")
+            exit(3)
         mem.seek(heap['start'] + i)
         mem.write(bytes(replace, "ASCII"))
