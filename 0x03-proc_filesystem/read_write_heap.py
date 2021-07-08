@@ -9,9 +9,11 @@ if __name__ == "__main__":
         print("use {} pid search_string replace_string".format(argv[0]))
         exit(1)
     [pid, search, replace] = argv[1:]
-    if "" in [pid, search, replace]:
+    if "" in [pid, search]:
         print("please use a no empty value")
         exit(1)
+    if replace == '':
+        replace = ' ' * len(search)
     maps_path = "/proc/{}/maps".format(pid)
     mem_path = "/proc/{}/mem".format(pid)
     heap = {
