@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+''' a script that finds a string in the
+heap of a running process, and replaces it.'''
+
 from sys import argv, exit
 from pprint import pprint
 if __name__ == "__main__":
