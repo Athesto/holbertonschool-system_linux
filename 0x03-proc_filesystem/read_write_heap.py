@@ -11,7 +11,7 @@ if __name__ == "__main__":
     [pid, search, replace] = argv[1:]
     if "" in [pid, search, replace]:
         print("please use a no empty value")
-        exit(4)
+        exit(1)
     maps_path = "/proc/{}/maps".format(pid)
     mem_path = "/proc/{}/mem".format(pid)
     heap = {
