@@ -16,9 +16,8 @@ void printGotcha(int code)
  */
 int handle_sigaction(void)
 {
-	sigaction_t act;
+	struct sigaction act = {0, {0, 0}};
 
-	memset(&act, 0, sizeof(act));
 	act.sa_handler = printGotcha;
 	return (sigaction(SIGINT, &act, NULL));
 }
