@@ -37,6 +37,7 @@ void print_content(linked_t *dir_list, linked_t *file_list)
 		}
 		get_content_dir(dir, &entry_list);
 		print_content_dir(entry_list);
+		list_free(entry_list);
 
 		if (file_counter || dir_counter)
 			printf("\n");
