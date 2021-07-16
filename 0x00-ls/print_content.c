@@ -11,6 +11,7 @@ void print_content(linked_t *dir_list, linked_t *file_list)
 {
 	int file_counter;
 	int dir_counter;
+	int *entry_counter = &globals()->entry_counter;
 	linked_t *runner;
 	linked_t *entry_list;
 	DIR *dir;
@@ -40,7 +41,7 @@ void print_content(linked_t *dir_list, linked_t *file_list)
 
 		if (file_counter || dir_counter)
 			printf("\n");
-		if (file_counter || !(dir_list && !dir_list->next))
+		if (*entry_counter > 1 || !(dir_list && !dir_list->next))
 			printf("%s:\n", runner->name);
 		print_content_dir(entry_list);
 		list_free(entry_list);
