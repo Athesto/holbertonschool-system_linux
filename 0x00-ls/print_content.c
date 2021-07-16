@@ -12,6 +12,7 @@ void print_content(linked_t *dir_list, linked_t *file_list)
 	int file_counter;
 	int dir_counter;
 	int *entry_counter = &globals()->entry_counter;
+	flag_t *flags = &globals()->flags;
 	linked_t *runner;
 	linked_t *entry_list;
 	DIR *dir;
@@ -20,7 +21,7 @@ void print_content(linked_t *dir_list, linked_t *file_list)
 	for (runner = file_list; runner; runner = runner->next, file_counter++)
 	{
 		if (file_counter)
-			printf(" ");
+			printf(flags->One ? "\n" : " ");
 		printf("%s", runner->name);
 	}
 
@@ -56,13 +57,15 @@ void print_content(linked_t *dir_list, linked_t *file_list)
 void print_content_dir(linked_t *entry_list)
 {
 	int counter;
+	flag_t *flags = &globals()->flags;
 	linked_t *runner;
 
 	counter = 0;
 	for (runner = entry_list; runner; runner = runner->next, counter++)
 	{
 		if (counter)
-			printf(" ");
+			printf(flags->One ? "\n" : " ");
+
 		printf("%s", runner->entry->d_name);
 
 	}

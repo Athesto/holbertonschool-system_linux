@@ -37,7 +37,7 @@ void splitargv(linked_t **dir, linked_t **file, char **argv)
 /**
  * isdir - check if an element is a dir
  * @name: pathname
- * Return: 0=not file/dir, 1=file, 2=dir
+ * Return: 0=not-file-dir, 1=file, 2=dir
  */
 int isdir(const char *name)
 {
