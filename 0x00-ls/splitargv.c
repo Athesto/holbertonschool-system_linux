@@ -41,7 +41,7 @@ int isdir(const char *name)
 {
 	struct stat my_stat = {0};
 
-	if (stat(name, &my_stat))
+	if (lstat(name, &my_stat))
 		return (0);
 
 	if (S_ISREG(my_stat.st_mode))
