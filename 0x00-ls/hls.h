@@ -36,6 +36,7 @@ typedef struct flag_s
  * struct global_s - global variables
  * @flags: flags of the program
  * @program: program name
+ * @entry_counter: number of entry (no flags)
  * @status: program status, 0=no_error, 1=??, 2=perror
  */
 typedef struct global_s
@@ -43,6 +44,7 @@ typedef struct global_s
 	flag_t flags;
 	char *program;
 	int status;
+	int entry_counter;
 } global_t;
 
 /* linked list */
