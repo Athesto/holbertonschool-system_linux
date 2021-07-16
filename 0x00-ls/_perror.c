@@ -10,7 +10,7 @@ void _perror(char *argv)
 	char *program = globals()->program;
 	int *status = &globals()->status;
 
-	sprintf(msg, "%s: cannot access '%s'", program, argv);
+	sprintf(msg, "%s: cannot access %s", program, argv);
 	perror(msg);
 	*status = 2;
 }
