@@ -83,4 +83,5 @@ void _perror(char *argv);
 linked_t *list_append(linked_t **head, int type, ...);
 void list_free(linked_t *head);
 void print_content(linked_t *dir_list, linked_t *file_list);
+int _strcmp(char *a, char *b);
 #endif /* _HLS_H_ */
