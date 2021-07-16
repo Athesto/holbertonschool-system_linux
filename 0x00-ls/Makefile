@@ -7,7 +7,7 @@ ARG=
 build:
 	@rm -f hls
 	$(CC) $(CFLAGS) $(SRC) -o $(DST)
-	@betty-style *.c
-	@betty-doc *.c 1>/dev/null
+	@betty-style *.c *.h
+	@betty-doc *.c *.h 1>/dev/null
 	@#./hls $(ARG)
 

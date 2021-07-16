@@ -34,7 +34,7 @@ typedef struct flag_s
 
 /**
  * struct global_s - global variables
- * @flag: flags of the program
+ * @flags: flags of the program
  * @program: program name
  * @status: program status, 0=no_error, 1=??, 2=perror
  */
@@ -48,16 +48,24 @@ typedef struct global_s
 /* linked list */
 /**
  * struct linked_s - linked list
+ * @name: name of element
+ * @entry: entry of directory
  * @next: next node
  */
 typedef struct linked_s
 {
-	char * name;
+	char *name;
 	struct linked_s *next;
 	struct dirent *entry;
-}linked_t;
+} linked_t;
 
-enum {
+/**
+ * enum linked_append_opts - options for append in linked list
+ * @DIR_ENTRY: if it's a entry of directory
+ * @ARGS: if has args
+ */
+enum linked_append_opts
+{
 	DIR_ENTRY,
 	ARGS
 };
