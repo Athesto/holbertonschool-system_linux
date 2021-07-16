@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-PROGRAM="${1-./hls}"
+PROGRAM="$*" 
 
 cd learning/ls_dirs || exit
 
@@ -27,3 +27,8 @@ ${PROGRAM} z x y z
 echo -e "\nmultiple file + multiple dir + error"
 ${PROGRAM} x b a f2 f1 x y z y f3
 
+echo -e "\nmissing folder"
+${PROGRAM} d1/f4
+
+echo -e "\nmissing folder and multiforlder"
+${PROGRAM} d1/f4 x x
