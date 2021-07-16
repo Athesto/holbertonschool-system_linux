@@ -11,6 +11,7 @@ int isdir(const char *name);
 void splitargv(linked_t **dir, linked_t **file, char **argv)
 {
 	int i, dir_info;
+	int *entry_counter = &globals()->entry_counter;
 
 	for (i = 1; argv[i]; i++)
 	{
@@ -19,6 +20,7 @@ void splitargv(linked_t **dir, linked_t **file, char **argv)
 			setflag(argv[i]);
 			continue;
 		}
+		(*entry_counter)++;
 		dir_info = isdir(argv[i]);
 		if (dir_info == 0)
 			_perror(argv[i]);
@@ -28,7 +30,7 @@ void splitargv(linked_t **dir, linked_t **file, char **argv)
 			list_append(dir, ARGS, argv[i]);
 	}
 
-	if (*file == NULL && *dir == NULL)
+	if (*entry_counter == 0 && *file == NULL && *dir == NULL)
 		list_append(dir, ARGS, ".");
 }
 
