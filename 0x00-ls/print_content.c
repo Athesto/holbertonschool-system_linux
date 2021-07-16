@@ -12,7 +12,7 @@ void print_content(linked_t *dir_list, linked_t *file_list)
 	int file_counter;
 	int dir_counter;
 	linked_t *runner;
-	linked_t *entry_list = NULL;
+	linked_t *entry_list;
 	DIR *dir;
 
 	file_counter = 0;
@@ -35,14 +35,15 @@ void print_content(linked_t *dir_list, linked_t *file_list)
 			_perror(runner->name);
 			continue;
 		}
+		entry_list = NULL;
 		get_content_dir(dir, &entry_list);
-		print_content_dir(entry_list);
-		list_free(entry_list);
 
 		if (file_counter || dir_counter)
 			printf("\n");
 		if (file_counter || !(dir_list && !dir_list->next))
 			printf("%s:\n", runner->name);
+		print_content_dir(entry_list);
+		list_free(entry_list);
 		closedir(dir);
 	}
 }
