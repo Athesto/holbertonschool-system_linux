@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+PROGRAM="${1-./hls}"
+
+cd learning/ls_dirs || exit
+
+echo "single file"
+${PROGRAM} a
+
+echo -e "\nmultiple file"
+${PROGRAM} a b c 
+
+echo -e "\nmultiple file + error"
+${PROGRAM} c b a f1 f3 f2 
+
+echo -e "\nempty"
+${PROGRAM}
+
+echo -e "\nsingle dir"
+${PROGRAM} x
+
+echo -e "\nmultiple dir"
+${PROGRAM} z x z
+
+echo -e "\nmultiple dir + error"
+${PROGRAM} z x y z
+
+echo -e "\nmultiple file + multiple dir + error"
+${PROGRAM} x b a f2 f1 x y z y f3
+
