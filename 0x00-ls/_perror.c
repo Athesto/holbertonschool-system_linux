@@ -14,7 +14,7 @@ void _perror(char *argv)
 	switch (errno)
 	{
 		case EACCES:
-			tmp = "%s: cannot open directoy %s";
+			tmp = "%s: cannot open directory %s";
 			break;
 		default:
 			tmp = "%s: cannot access %s";
