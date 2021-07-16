@@ -82,18 +82,18 @@ void get_content_dir(DIR *dir, linked_t **entry_list)
 	flag_t *flags = &globals()->flags;
 	struct dirent *entry;
 	char *name;
-	int condition = 0;
+	int isEnable = 0;
 	int counter;
 
 	for (counter = 0; (entry = readdir(dir)) != NULL; counter++)
 	{
 		name = entry->d_name;
-		condition = 0;
-		condition |= name[0] != '.';
-		condition |= flags->a;
-		condition |= flags->A && !(!strcmp(name, ".") || !strcmp(name, ".."));
+		isEnable = 0;
+		isEnable |= name[0] != '.';
+		isEnable |= flags->a;
+		isEnable |= flags->A && !(!_strcmp(name, ".") || !_strcmp(name, ".."));
 
-		if (condition)
+		if (isEnable)
 			list_append(entry_list, DIR_ENTRY, entry);
 
 	}
