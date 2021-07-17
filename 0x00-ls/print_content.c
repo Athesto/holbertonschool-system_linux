@@ -1,6 +1,6 @@
 #include "hls.h"
 void print_content_dir(linked_t *entry_list);
-void get_content_dir(DIR *dir, linked_t **entry_list);
+void get_content_dir(DIR *dir, char *parent, linked_t **entry_list);
 
 /**
  * print_content - print content of lists
@@ -13,8 +13,7 @@ void print_content(linked_t *dir_list, linked_t *file_list)
 	int dir_counter;
 	int *entry_counter = &globals()->entry_counter;
 	flag_t *flags = &globals()->flags;
-	linked_t *runner;
-	linked_t *entry_list;
+	linked_t *runner, *entry_list;
 	DIR *dir;
 
 	file_counter = 0;
@@ -38,7 +37,7 @@ void print_content(linked_t *dir_list, linked_t *file_list)
 			continue;
 		}
 		entry_list = NULL;
-		get_content_dir(dir, &entry_list);
+		get_content_dir(dir, runner->name, &entry_list);
 
 		if (file_counter || dir_counter)
 			printf("\n");
@@ -72,15 +71,18 @@ void print_content_dir(linked_t *entry_list)
 	if (counter)
 		printf("\n");
 }
+
 /**
  * get_content_dir - get a list of entry elements
  * @dir: directory of entries
+ * @parent: name of parent
  * @entry_list: entry
  */
-void get_content_dir(DIR *dir, linked_t **entry_list)
+void get_content_dir(DIR *dir, char *parent, linked_t **entry_list)
 {
 	flag_t *flags = &globals()->flags;
 	struct dirent *entry;
+	linked_t *node;
 	char *name;
 	int isEnable = 0;
 	int counter;
@@ -94,7 +96,14 @@ void get_content_dir(DIR *dir, linked_t **entry_list)
 		isEnable |= flags->A && !(!_strcmp(name, ".") || !_strcmp(name, ".."));
 
 		if (isEnable)
-			list_append(entry_list, DIR_ENTRY, entry);
+		{
+			node = list_append(entry_list, DIR_ENTRY, entry);
+			if (node)
+			{
+				node->parent = parent;
+				node->name = name;
+			}
+		}
 
 	}
 

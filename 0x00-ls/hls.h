@@ -10,6 +10,8 @@
 #include <string.h> /* strcmp */
 #include <stdarg.h> /* va_start, va_arg, va_end */
 
+#define max_t(x, y) (((x) > (y)) ? (x) : (y))
+
 /**
  * struct flag_s - flag structure
  * @a: show all hidden file (. and ..)
