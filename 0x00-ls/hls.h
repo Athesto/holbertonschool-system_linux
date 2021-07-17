@@ -70,6 +70,21 @@ typedef struct linked_s
 } linked_t;
 
 /**
+ * struct padding_s - the padding struct for -l flag
+ * @pad_links:		- padding for links
+ * @pad_usr:		- padding for user
+ * @pad_grp:		- padding for group
+ * @pad_size:		- paddig for size of file
+ */
+typedef struct padding_s
+{
+	int pad_links;
+	int pad_usr;
+	int pad_grp;
+	int pad_size;
+} padding_t;
+
+/**
  * enum linked_append_opts - options for append in linked list
  * @DIR_ENTRY: if it's a entry of directory
  * @ARGS: if has args

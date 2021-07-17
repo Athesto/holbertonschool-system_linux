@@ -24,7 +24,10 @@ void print_content(linked_t *dir_list, linked_t *file_list)
 	{
 		if (file_counter)
 			printf(flags->One ? "\n" : " ");
-		printf("%s", runner->name);
+		if (flags->l)
+			printl(runner, padding);
+		else
+			printf("%s", runner->name);
 	}
 
 	if (file_counter)
