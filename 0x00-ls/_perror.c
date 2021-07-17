@@ -20,7 +20,7 @@ void _perror(char *argv)
 			tmp = "%s: cannot access %s";
 
 	}
-	msg = malloc(strlen(tmp) + strlen(program) + strlen(argv));
+	msg = malloc(_strlen(tmp) + _strlen(program) + _strlen(argv));
 	sprintf(msg, tmp, program, argv);
 	perror(msg);
 	free(msg);

@@ -104,6 +104,7 @@ int _strcmp(char *a, char *b);
 void getlstat(struct stat *mystat, linked_t *list);
 padding_t getpadding(linked_t *list);
 void printl(linked_t *entry, padding_t padding);
+size_t _strlen(const char *s);
 
 /* linked list */
 linked_t *list_append(linked_t **head, int type, ...);

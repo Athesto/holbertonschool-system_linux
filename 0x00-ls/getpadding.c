@@ -17,10 +17,10 @@ padding_t getpadding(linked_t *list)
 		getlstat(&mystat, runner);
 		max_pd.pad_links = max_t(max_pd.pad_links, (int)mystat.st_nlink);
 
-		len = strlen(getpwuid(mystat.st_uid)->pw_name);
+		len = _strlen(getpwuid(mystat.st_uid)->pw_name);
 		max_pd.pad_usr = max_t(max_pd.pad_usr, len);
 
-		len = strlen(getgrgid(mystat.st_uid)->gr_name);
+		len = _strlen(getgrgid(mystat.st_uid)->gr_name);
 		max_pd.pad_grp = max_t(max_pd.pad_grp, len);
 
 		max_pd.pad_size = max_t(max_pd.pad_size, mystat.st_size);

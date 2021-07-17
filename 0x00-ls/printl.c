@@ -124,9 +124,9 @@ void getlstat(struct stat *mystat, linked_t *list)
 	else
 	{
 		len = 0;
-		len += strlen(name_format);
-		len += strlen(list->name);
-		len += strlen(list->parent);
+		len += _strlen(name_format);
+		len += _strlen(list->name);
+		len += _strlen(list->parent);
 
 		name = malloc(len);
 		sprintf(name, name_format, list->parent, list->name);
