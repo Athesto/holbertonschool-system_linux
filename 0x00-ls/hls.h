@@ -9,6 +9,9 @@
 #include <dirent.h> /* stat, struct stat */
 #include <string.h> /* strcmp */
 #include <stdarg.h> /* va_start, va_arg, va_end */
+#include <pwd.h> /* getpwuid */
+#include <grp.h> /* getgrgid */
+#include <time.h> /* ctime */
 
 #define max_t(x, y) (((x) > (y)) ? (x) : (y))
 
@@ -77,14 +80,15 @@ enum linked_append_opts
 	ARGS
 };
 
-
-
 global_t *globals(void);
 int hls(char *argv[]);
 void splitargv(linked_t **dir, linked_t **file, char **argv);
 void _perror(char *argv);
 void print_content(linked_t *dir_list, linked_t *file_list);
 int _strcmp(char *a, char *b);
+void getlstat(struct stat *mystat, linked_t *list);
+padding_t getpadding(linked_t *list);
+void printl(linked_t *entry, padding_t padding);
 
 /* linked list */
 linked_t *list_append(linked_t **head, int type, ...);
