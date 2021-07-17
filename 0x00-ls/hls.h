@@ -83,11 +83,11 @@ global_t *globals(void);
 int hls(char *argv[]);
 void splitargv(linked_t **dir, linked_t **file, char **argv);
 void _perror(char *argv);
+void print_content(linked_t *dir_list, linked_t *file_list);
 int _strcmp(char *a, char *b);
 
 /* linked list */
 linked_t *list_append(linked_t **head, int type, ...);
 void list_free(linked_t *head);
-void print_content(linked_t *dir_list, linked_t *file_list);
 
 #endif /* _HLS_H_ */
