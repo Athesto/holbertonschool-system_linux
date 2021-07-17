@@ -1,34 +1,35 @@
 #!/usr/bin/env bash
-PROGRAM="$*" 
+PROGRAM="$1"
+OPT="-l"
 
 cd learning/ls_dirs || exit
 
 echo "single file"
-${PROGRAM} a
+valgrind -q "${PROGRAM}" "$OPT" a
 
 echo -e "\nmultiple file"
-${PROGRAM} a b c 
+valgrind -q "${PROGRAM}" "$OPT" a b c
 
 echo -e "\nmultiple file + error"
-${PROGRAM} c b a f1 f3 f2 
+valgrind -q "${PROGRAM}" "$OPT" c b a f1 f3 f2
 
 echo -e "\nempty"
-${PROGRAM}
+valgrind -q "${PROGRAM}" "$OPT"
 
 echo -e "\nsingle dir"
-${PROGRAM} x
+valgrind -q "${PROGRAM}" "$OPT" x
 
 echo -e "\nmultiple dir"
-${PROGRAM} z x z
+valgrind -q "${PROGRAM}" "$OPT" z x z
 
 echo -e "\nmultiple dir + error"
-${PROGRAM} z x y z
+valgrind -q "${PROGRAM}" "$OPT" z x y z
 
 echo -e "\nmultiple file + multiple dir + error"
-${PROGRAM} x b a f2 f1 x y z y f3
+valgrind -q "${PROGRAM}" "$OPT" x b a f2 f1 x y z y f3
 
 echo -e "\nmissing folder"
-${PROGRAM} d1/f4
+valgrind -q "${PROGRAM}" "$OPT" d1/f4
 
 echo -e "\nmissing folder and multiforlder"
-${PROGRAM} d1/f4 x x
+valgrind -q "${PROGRAM}" "$OPT" d1/f4 x x
