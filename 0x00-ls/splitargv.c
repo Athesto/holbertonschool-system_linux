@@ -86,6 +86,7 @@ void setflag(char *argv)
 				flag->R = 1;
 				break;
 			case 'l':
+				flag->One = 1;
 				flag->l = 1;
 				break;
 			default:
