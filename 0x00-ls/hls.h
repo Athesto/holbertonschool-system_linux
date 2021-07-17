@@ -53,10 +53,12 @@ typedef struct global_s
  * @name: name of element
  * @entry: entry of directory
  * @next: next node
+ * @parent: for entries the parent directory
  */
 typedef struct linked_s
 {
 	char *name;
+	char *parent;
 	struct linked_s *next;
 	struct dirent *entry;
 } linked_t;

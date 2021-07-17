@@ -14,6 +14,9 @@ linked_t *list_append(linked_t **head, int type, ...)
 	if (!new)
 		return (NULL);
 	new->next = NULL;
+	new->parent = NULL;
+	new->name = NULL;
+	new->entry = NULL;
 
 	va_start(args, type);
 	if (type == DIR_ENTRY)
