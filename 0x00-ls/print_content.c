@@ -15,6 +15,9 @@ void print_content(linked_t *dir_list, linked_t *file_list)
 	flag_t *flags = &globals()->flags;
 	linked_t *runner, *entry_list;
 	DIR *dir;
+	padding_t padding;
+
+	padding = getpadding(file_list);
 
 	file_counter = 0;
 	for (runner = file_list; runner; runner = runner->next, file_counter++)
@@ -58,6 +61,9 @@ void print_content_dir(linked_t *entry_list)
 	int counter;
 	flag_t *flags = &globals()->flags;
 	linked_t *runner;
+	padding_t padding;
+
+	padding = getpadding(entry_list);
 
 	counter = 0;
 	for (runner = entry_list; runner; runner = runner->next, counter++)
@@ -65,7 +71,10 @@ void print_content_dir(linked_t *entry_list)
 		if (counter)
 			printf(flags->One ? "\n" : " ");
 
-		printf("%s", runner->entry->d_name);
+		if (flags->l)
+			printl(runner, padding);
+		else
+			printf("%s", runner->entry->d_name);
 
 	}
 	if (counter)
