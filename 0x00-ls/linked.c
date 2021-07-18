@@ -48,7 +48,12 @@ linked_t *list_append(linked_t **head, int type, ...)
  */
 void list_free(linked_t *head)
 {
-	if (head)
-		list_free(head->next);
-	free(head);
+	linked_t *killer;
+
+	killer = head;
+	for (killer = head; head; free(killer))
+	{
+		killer = head;
+		head = head->next;
+	}
 }
