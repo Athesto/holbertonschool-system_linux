@@ -23,7 +23,7 @@ void print_content(linked_t *dir_list, linked_t *file_list)
 	for (runner = file_list; runner; runner = runner->next, file_counter++)
 	{
 		if (file_counter)
-			printf(flags->One ? "\n" : " ");
+			printf(flags->One ? "\n" : "  ");
 		if (flags->l)
 			printl(runner, padding);
 		else
@@ -75,7 +75,7 @@ void print_content_dir(linked_t *entry_list)
 	for (runner = entry_list; runner; runner = runner->next, counter++)
 	{
 		if (counter)
-			printf(flags->One ? "\n" : " ");
+			printf(flags->One ? "\n" : "  ");
 
 		if (flags->l)
 			printl(runner, padding);
