@@ -7,7 +7,7 @@
  */
 size_t _strlen(const char *s)
 {
-	int len;
+	size_t len;
 
 	len = 0;
 	while (s[len])
