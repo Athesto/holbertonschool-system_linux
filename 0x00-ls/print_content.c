@@ -17,6 +17,9 @@ void print_content(linked_t *dir_list, linked_t *file_list)
 	DIR *dir;
 	padding_t padding = {0};
 
+	list_free(file_list);
+	return; /*only print here*/
+
 	padding = getpadding(file_list);
 
 	file_counter = 0;
