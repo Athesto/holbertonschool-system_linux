@@ -15,7 +15,6 @@ int hls(char *argv[])
 	print_content(dir_list, file_list);
 
 
-	list_free(file_list);
 	list_free(dir_list);
 	return (*status);
 

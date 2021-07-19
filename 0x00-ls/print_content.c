@@ -29,6 +29,7 @@ void print_content(linked_t *dir_list, linked_t *file_list)
 		else
 			printf("%s", runner->name);
 	}
+	list_free(file_list); /* I don't want to use it here but it needs to be */
 
 	if (file_counter)
 		printf("\n");
