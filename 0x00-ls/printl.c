@@ -134,8 +134,5 @@ void getlstat(struct stat *mystat, linked_t *list)
 
 	lstat(name, mystat);
 	if (list->parent)
-	{
 		free(name);
-		name = list->name;
-	}
 }

@@ -17,7 +17,8 @@ void print_content(linked_t *dir_list, linked_t *file_list)
 	DIR *dir;
 	padding_t padding;
 
-	padding = getpadding(file_list);
+	if (flags->l)
+		padding = getpadding(file_list);
 
 	file_counter = 0;
 	for (runner = file_list; runner; runner = runner->next, file_counter++)
@@ -70,7 +71,8 @@ void print_content_dir(linked_t *entry_list)
 	linked_t *runner;
 	padding_t padding;
 
-	padding = getpadding(entry_list);
+	if (flags->l)
+		padding = getpadding(entry_list);
 
 	counter = 0;
 	for (runner = entry_list; runner; runner = runner->next, counter++)
