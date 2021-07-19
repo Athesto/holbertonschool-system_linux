@@ -25,6 +25,7 @@ void print_content(linked_t *dir_list, linked_t *file_list)
 	file_counter = 0;
 	for (runner = file_list; runner; runner = runner->next, file_counter++)
 	{
+		printf("every loop\n");
 		if (file_counter)
 			printf(flags->One ? "\n" : "  ");
 		if (flags->l)
