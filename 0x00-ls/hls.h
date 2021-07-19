@@ -13,7 +13,7 @@
 #include <grp.h> /* getgrgid */
 #include <time.h> /* ctime */
 
-#define max_t(x, y) (((x) > (y)) ? (x) : (y))
+#define max_t(x, y) (((x) >= (y)) ? (x) : (y))
 
 /**
  * struct flag_s - flag structure
