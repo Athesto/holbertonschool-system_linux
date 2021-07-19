@@ -22,7 +22,6 @@ void print_content(linked_t *dir_list, linked_t *file_list)
 	padding = getpadding(file_list);
 
 	printf("print post padding\n");
-	return;
 	file_counter = 0;
 	for (runner = file_list; runner; runner = runner->next, file_counter++)
 	{
@@ -40,8 +39,8 @@ void print_content(linked_t *dir_list, linked_t *file_list)
 	 * But, I'm trying to free some memory before allocate more
 	 */
 	printf("print post files\n");
-	list_free(file_list);
 	return; /*only print here*/
+	list_free(file_list);
 
 	dir_counter = 0;
 	for (runner = dir_list; runner; runner = runner->next, dir_counter++)
