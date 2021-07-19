@@ -58,7 +58,7 @@ void print_content(linked_t *dir_list, linked_t *file_list)
 			printf("%s:\n", runner->name);
 		if (flags->l)
 			printf("total 0\n");
-		/* print_content_dir(entry_list); */
+		print_content_dir(entry_list);
 		list_free(entry_list);
 		closedir(dir);
 	}
@@ -75,8 +75,12 @@ void print_content_dir(linked_t *entry_list)
 	linked_t *runner;
 	padding_t padding = {0};
 
+	printf("pre padding\n");
 	if (flags->l)
 		padding = getpadding(entry_list);
+
+	printf("post padding\n");
+	return;
 
 	counter = 0;
 	for (runner = entry_list; runner; runner = runner->next, counter++)
