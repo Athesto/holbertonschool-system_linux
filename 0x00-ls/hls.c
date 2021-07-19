@@ -13,12 +13,10 @@ int hls(char *argv[])
 
 	fprintf(stdout, "testing fprintf in stdout %d\n", 10);
 	splitargv(&dir_list, &file_list, argv);
-	/* print_content(dir_list, file_list); */
+	print_content(dir_list, file_list);
 
 
 	list_free(dir_list);
-	list_free(file_list);
-	(void) argv;
 	fprintf(stdout, "testing fprintf in stdout at endu%d\n", 10);
 	return (*status);
 
