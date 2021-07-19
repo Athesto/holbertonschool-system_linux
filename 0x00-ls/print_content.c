@@ -18,14 +18,12 @@ void print_content(linked_t *dir_list, linked_t *file_list)
 	padding_t padding = {0};
 
 
-	printf("print pre padding\n");
 	padding = getpadding(file_list);
 
-	printf("print post padding\n");
 	file_counter = 0;
+
 	for (runner = file_list; runner; runner = runner->next, file_counter++)
 	{
-		printf("every loop\n");
 		if (file_counter)
 			printf(flags->One ? "\n" : "  ");
 		if (flags->l)
@@ -39,8 +37,6 @@ void print_content(linked_t *dir_list, linked_t *file_list)
 	 * I don't want to use it here.
 	 * But, I'm trying to free some memory before allocate more
 	 */
-	printf("print post files\n");
-	return; /*only print here*/
 	list_free(file_list);
 
 	dir_counter = 0;
@@ -62,7 +58,7 @@ void print_content(linked_t *dir_list, linked_t *file_list)
 			printf("%s:\n", runner->name);
 		if (flags->l)
 			printf("total 0\n");
-		print_content_dir(entry_list);
+		/* print_content_dir(entry_list); */
 		list_free(entry_list);
 		closedir(dir);
 	}
