@@ -11,8 +11,9 @@ padding_t getpadding(linked_t *list)
 	int len = 0;
 	struct stat mystat = {0};
 	int counter, tmp;
-	char *name, *group;
-	struct passwd *user;
+	char *user_name, *user_group;
+	struct passwd *passswd_s;
+	struct group *group_s;
 
 	printf("entry in get padding\n");
 	for (runner = list; runner; runner = runner->next)
@@ -23,23 +24,26 @@ padding_t getpadding(linked_t *list)
 		max_pd.pad_links = max_t(max_pd.pad_links, (int)mystat.st_nlink);
 		printf("post getlstat\n");
 
-		user = getpwuid(mystat.st_uid);
-		if (user)
-			name = user->pw_name;
+		passswd_s = getpwuid(mystat.st_uid);
+		if (passswd_s)
+			user_name = passswd_s->pw_name;
 		else
-			name = NULL;
-		continue;
+			user_name = NULL;
 
-		if (name)
-			len = _strlen(name);
+		if (user_name)
+			len = _strlen(user_name);
 		max_pd.pad_usr = max_t(max_pd.pad_usr, len);
 		printf("post pwuid\n");
 
+		group_s = getgrgid(mystat.st_uid);
 
+		if (group_s)
+			user_group = group_s->gr_name;
+		else
+			user_group = NULL;
 
-		group = getgrgid(mystat.st_uid)->gr_name;
-		if (group)
-			len = _strlen(group);
+		if (user_group)
+			len = _strlen(user_group);
 		max_pd.pad_grp = max_t(max_pd.pad_grp, len);
 
 		max_pd.pad_size = max_t(max_pd.pad_size, mystat.st_size);
