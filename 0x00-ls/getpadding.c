@@ -18,16 +18,18 @@ padding_t getpadding(linked_t *list)
 	{
 		printf("entry in get padding\n");
 		getlstat(&mystat, runner);
-		printf("post getlstat\n");
 
 		max_pd.pad_links = max_t(max_pd.pad_links, (int)mystat.st_nlink);
+		printf("post getlstat\n");
 
-		continue;
 		name = getpwuid(mystat.st_uid)->pw_name;
 		if (name)
 			len = _strlen(name);
 		max_pd.pad_usr = max_t(max_pd.pad_usr, len);
+		printf("post pwuid\n");
 
+
+		continue;
 
 		group = getgrgid(mystat.st_uid)->gr_name;
 		if (group)
