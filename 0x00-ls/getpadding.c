@@ -17,10 +17,12 @@ padding_t getpadding(linked_t *list)
 	for (runner = list; runner; runner = runner->next)
 	{
 		printf("entry in get padding\n");
-		continue;
 		getlstat(&mystat, runner);
+		printf("post getlstat\n");
+
 		max_pd.pad_links = max_t(max_pd.pad_links, (int)mystat.st_nlink);
 
+		continue;
 		name = getpwuid(mystat.st_uid)->pw_name;
 		if (name)
 			len = _strlen(name);
