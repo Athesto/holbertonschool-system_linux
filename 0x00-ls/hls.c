@@ -11,6 +11,7 @@ int hls(char *argv[])
 	linked_t *dir_list = NULL;
 
 
+	printf("welcome");
 	splitargv(&dir_list, &file_list, argv);
 	print_content(dir_list, file_list);
 
