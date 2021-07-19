@@ -17,7 +17,7 @@ void print_content(linked_t *dir_list, linked_t *file_list)
 	DIR *dir;
 	padding_t padding = {0};
 
-	if (0 && flags->l)
+	if (flags->l)
 		padding = getpadding(file_list);
 
 	file_counter = 0;
@@ -30,10 +30,13 @@ void print_content(linked_t *dir_list, linked_t *file_list)
 		else
 			printf("%s", runner->name);
 	}
-	list_free(file_list); /* I don't want to use it here but it needs to be */
-
 	if (file_counter)
 		printf("\n");
+	/*
+	 * I don't want to use it here.
+	 * But, I'm trying to free some memory before allocate more
+	 */
+	list_free(file_list);
 
 	dir_counter = 0;
 	for (runner = dir_list; runner; runner = runner->next, dir_counter++)
@@ -71,7 +74,7 @@ void print_content_dir(linked_t *entry_list)
 	linked_t *runner;
 	padding_t padding = {0};
 
-	if (0 && flags->l)
+	if (flags->l)
 		padding = getpadding(entry_list);
 
 	counter = 0;
