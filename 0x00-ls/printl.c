@@ -1,7 +1,9 @@
 #include "hls.h"
+#define BUFSIZE 64
 
 char *getmtime(struct stat mystat);
 void getmode(char *p_mode, char *permissions, struct stat mystat);
+void _getlink(char *buffer, linked_t *entry, int size);
 /**
  * printl - print ls with l flag
  * @entry: path of entry
@@ -10,7 +12,7 @@ void getmode(char *p_mode, char *permissions, struct stat mystat);
 void printl(linked_t *entry, padding_t padding)
 {
 	char *pre_format = "%%c%%s %%%dd %%%ds %%%ds %%%dd %%s %%s";
-	char format[64] = "";
+	char buffer[BUFSIZE] = "";
 	char own_uid[10], group_uid[10];
 	char mode;
 	struct stat mystat = {0};
@@ -36,11 +38,16 @@ void printl(linked_t *entry, padding_t padding)
 	size = mystat.st_size;
 	mod_time = getmtime(mystat);
 
-	sprintf(format, pre_format,
+	sprintf(buffer, pre_format,
 			padding.pad_links, padding.pad_usr,
 			padding.pad_grp, padding.pad_size);
 
-	printf(format, mode, permissions, links, own, group, size, mod_time, name);
+	printf(buffer, mode, permissions, links, own, group, size, mod_time, name);
+	if (mode == 'l')
+	{
+		_getlink(buffer, entry, BUFSIZE);
+		printf(" -> %s", buffer);
+	}
 }
 
 /**
@@ -143,3 +150,33 @@ void getlstat(struct stat *mystat, linked_t *list)
 	if (list->parent)
 		free(name);
 }
+/**
+ * _getlink - get information of a link
+ * @buffer: output buffer
+ * @entry: entry value
+ * @size: size of buffer
+ */
+void _getlink(char *buffer, linked_t *entry, int size)
+{
+	char *name_format = "%s/%s";
+	int len;
+	char *name;
+
+	if (entry->parent == NULL)
+		name = entry->name;
+	else
+	{
+		len = 0;
+		len += _strlen(name_format);
+		len += _strlen(entry->name);
+		len += _strlen(entry->parent);
+
+		name = malloc(len);
+		sprintf(name, name_format, entry->parent, entry->name);
+	}
+	len = readlink(name, buffer, size);
+	buffer[len] = '\0';
+	if (entry->parent)
+		free(name);
+}
+

@@ -12,6 +12,7 @@
 #include <pwd.h> /* getpwuid */
 #include <grp.h> /* getgrgid */
 #include <time.h> /* ctime */
+#include <unistd.h> /* readlink */
 
 #define max_t(x, y) (((x) >= (y)) ? (x) : (y))
 
