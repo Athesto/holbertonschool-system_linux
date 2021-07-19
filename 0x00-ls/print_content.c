@@ -34,9 +34,9 @@ void print_content(linked_t *dir_list, linked_t *file_list)
 	if (file_counter)
 		printf("\n");
 	/*
-	 * I don't want to use it here.
-	 * But, I'm trying to free some memory before allocate more
-	 */
+	* I don't want to use it here.
+	* But, I'm trying to free some memory before allocate more
+	*/
 	list_free(file_list);
 
 	dir_counter = 0;
@@ -80,7 +80,6 @@ void print_content_dir(linked_t *entry_list)
 		padding = getpadding(entry_list);
 
 	printf("post padding\n");
-	return;
 
 	counter = 0;
 	for (runner = entry_list; runner; runner = runner->next, counter++)
@@ -96,6 +95,7 @@ void print_content_dir(linked_t *entry_list)
 	}
 	if (counter)
 		printf("\n");
+	printf("post printing\n");
 }
 
 /**

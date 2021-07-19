@@ -11,13 +11,13 @@ int hls(char *argv[])
 	linked_t *dir_list = NULL;
 
 
-	fprintf(stdout, "testing fprintf in stdout %d\n", 10);
+	printf("input pogram\n");
 	splitargv(&dir_list, &file_list, argv);
 	print_content(dir_list, file_list);
 
 
 	list_free(dir_list);
-	fprintf(stdout, "testing fprintf in stdout at endu%d\n", 10);
+	printf("end program\n");
 	return (*status);
 
 }
