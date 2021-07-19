@@ -11,6 +11,7 @@ void printl(linked_t *entry, padding_t padding)
 {
 	char *pre_format = "%%c%%s %%%dd %%%ds %%%ds %%%dd %%s %%s";
 	char format[64] = "";
+	char own_uid[10], group_uid[10];
 	char mode;
 	struct stat mystat = {0};
 	int links;
@@ -20,23 +21,24 @@ void printl(linked_t *entry, padding_t padding)
 	struct passwd *passwd_s;
 	struct group *group_s;
 
-	sprintf(format, pre_format,
-			padding.pad_links, padding.pad_usr,
-			padding.pad_grp, padding.pad_size);
+	getlstat(&mystat, entry);
+	sprintf(own_uid, "%d", mystat.st_uid);
+	sprintf(group_uid, "%d", mystat.st_gid);
 
 	name = entry->name;
-	getlstat(&mystat, entry);
 	getmode(&mode, permissions, mystat);
-
 	passwd_s = getpwuid(mystat.st_uid);
-	own = (passwd_s) ? passwd_s->pw_name : "nil";
-
+	own = (passwd_s) ? passwd_s->pw_name : own_uid;
 	group_s = getgrgid(mystat.st_uid);
-	group = (group_s) ? group_s->gr_name : "nil";
+	group = (group_s) ? group_s->gr_name : group_uid;
 
 	links = mystat.st_nlink;
 	size = mystat.st_size;
 	mod_time = getmtime(mystat);
+
+	sprintf(format, pre_format,
+			padding.pad_links, padding.pad_usr,
+			padding.pad_grp, padding.pad_size);
 
 	printf(format, mode, permissions, links, own, group, size, mod_time, name);
 }
