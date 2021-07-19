@@ -17,6 +17,7 @@ int hls(char *argv[])
 
 
 	list_free(dir_list);
+	fprintf(stdout, "testing fprintf in stdout at endu%d\n", 10);
 	return (*status);
 
 }
