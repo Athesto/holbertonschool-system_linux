@@ -23,13 +23,14 @@ padding_t getpadding(linked_t *list)
 		printf("post getlstat\n");
 
 		name = getpwuid(mystat.st_uid)->pw_name;
+		continue;
+
 		if (name)
 			len = _strlen(name);
 		max_pd.pad_usr = max_t(max_pd.pad_usr, len);
 		printf("post pwuid\n");
 
 
-		continue;
 
 		group = getgrgid(mystat.st_uid)->gr_name;
 		if (group)
