@@ -24,8 +24,6 @@ void printl(linked_t *entry, padding_t padding)
 			padding.pad_links, padding.pad_usr,
 			padding.pad_grp, padding.pad_size);
 
-	printf("post sprintf");
-
 	name = entry->name;
 	getlstat(&mystat, entry);
 	getmode(&mode, permissions, mystat);
