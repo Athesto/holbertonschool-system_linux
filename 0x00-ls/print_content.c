@@ -88,7 +88,6 @@ void print_content_dir(linked_t *entry_list)
 			printf(flags->One ? "\n" : "  ");
 
 		printf("pre printl\n");
-		continue;
 		if (flags->l)
 			printl(runner, padding);
 		else
