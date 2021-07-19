@@ -49,7 +49,6 @@ padding_t getpadding(linked_t *list)
 		max_pd.pad_size = max_t(max_pd.pad_size, mystat.st_size);
 	}
 	printf("post for padding\n");
-	return (padding);
 	counter = 0;
 	for (counter = 0, tmp = max_pd.pad_links; tmp; counter++)
 		tmp /= 10;
