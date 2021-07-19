@@ -75,11 +75,8 @@ void print_content_dir(linked_t *entry_list)
 	linked_t *runner;
 	padding_t padding = {0};
 
-	printf("pre padding\n");
 	if (flags->l)
 		padding = getpadding(entry_list);
-
-	printf("post padding\n");
 
 	counter = 0;
 	for (runner = entry_list; runner; runner = runner->next, counter++)
@@ -87,7 +84,6 @@ void print_content_dir(linked_t *entry_list)
 		if (counter)
 			printf(flags->One ? "\n" : "  ");
 
-		printf("pre printl\n");
 		if (flags->l)
 			printl(runner, padding);
 		else
@@ -96,7 +92,6 @@ void print_content_dir(linked_t *entry_list)
 	}
 	if (counter)
 		printf("\n");
-	printf("post printing\n");
 }
 
 /**
