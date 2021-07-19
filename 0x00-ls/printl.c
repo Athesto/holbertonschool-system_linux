@@ -33,11 +33,11 @@ void printl(linked_t *entry, padding_t padding)
 	own = getpwuid(mystat.st_uid)->pw_name;
 	group = getgrgid(mystat.st_uid)->gr_name;
 	printf("half of args");
-	return;
 	links = mystat.st_nlink;
 	size = mystat.st_size;
 	mod_time = getmtime(mystat);
 
+	return;
 	printf(format, mode, permissions, links, own, group, size, mod_time, name);
 }
 
