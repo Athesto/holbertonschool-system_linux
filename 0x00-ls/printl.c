@@ -16,10 +16,9 @@ void printl(linked_t *entry, padding_t padding)
 	int links;
 	off_t size;
 	char permissions[] = "rwxrwxrwx";
-	char *own, *group;
-	char *mod_time;
-	char *name;
-
+	char *own, *group, *mod_time, *name;
+	struct passwd *passwd_s;
+	struct group *group_s;
 
 	sprintf(format, pre_format,
 			padding.pad_links, padding.pad_usr,
@@ -30,14 +29,17 @@ void printl(linked_t *entry, padding_t padding)
 	name = entry->name;
 	getlstat(&mystat, entry);
 	getmode(&mode, permissions, mystat);
-	own = getpwuid(mystat.st_uid)->pw_name;
-	group = getgrgid(mystat.st_uid)->gr_name;
-	printf("half of args");
+
+	passwd_s = getpwuid(mystat.st_uid);
+	own = (passwd_s) ? passwd_s->pw_name : "nil";
+
+	group_s = getgrgid(mystat.st_uid);
+	group = (group_s) ? group_s->gr_name : "nil";
+
 	links = mystat.st_nlink;
 	size = mystat.st_size;
 	mod_time = getmtime(mystat);
 
-	return;
 	printf(format, mode, permissions, links, own, group, size, mod_time, name);
 }
 
