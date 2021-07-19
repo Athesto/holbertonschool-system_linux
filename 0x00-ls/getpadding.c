@@ -13,9 +13,10 @@ padding_t getpadding(linked_t *list)
 	int counter, tmp;
 	char *name, *group;
 
-	return (padding);
+	printf("entry in get padding\n");
 	for (runner = list; runner; runner = runner->next)
 	{
+		printf("entry in get padding\n");
 		getlstat(&mystat, runner);
 		max_pd.pad_links = max_t(max_pd.pad_links, (int)mystat.st_nlink);
 
@@ -32,6 +33,8 @@ padding_t getpadding(linked_t *list)
 
 		max_pd.pad_size = max_t(max_pd.pad_size, mystat.st_size);
 	}
+	printf("post for padding\n");
+	return (padding);
 	counter = 0;
 	for (counter = 0, tmp = max_pd.pad_links; tmp; counter++)
 		tmp /= 10;
