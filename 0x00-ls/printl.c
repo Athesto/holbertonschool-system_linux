@@ -26,13 +26,14 @@ void printl(linked_t *entry, padding_t padding)
 			padding.pad_grp, padding.pad_size);
 
 	printf("post sprintf");
-	return;
 
 	name = entry->name;
 	getlstat(&mystat, entry);
 	getmode(&mode, permissions, mystat);
 	own = getpwuid(mystat.st_uid)->pw_name;
 	group = getgrgid(mystat.st_uid)->gr_name;
+	printf("half of args");
+	return;
 	links = mystat.st_nlink;
 	size = mystat.st_size;
 	mod_time = getmtime(mystat);
