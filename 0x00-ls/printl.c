@@ -20,9 +20,13 @@ void printl(linked_t *entry, padding_t padding)
 	char *mod_time;
 	char *name;
 
+
 	sprintf(format, pre_format,
 			padding.pad_links, padding.pad_usr,
 			padding.pad_grp, padding.pad_size);
+
+	printf("post sprintf");
+	return;
 
 	name = entry->name;
 	getlstat(&mystat, entry);
