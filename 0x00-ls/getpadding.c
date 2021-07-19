@@ -13,6 +13,7 @@ padding_t getpadding(linked_t *list)
 	int counter, tmp;
 	char *name, *group;
 
+	return (padding);
 	for (runner = list; runner; runner = runner->next)
 	{
 		getlstat(&mystat, runner);

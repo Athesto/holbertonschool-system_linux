@@ -76,7 +76,6 @@ void print_content_dir(linked_t *entry_list)
 	padding_t padding = {0};
 
 	printf("pre padding\n");
-	return;
 	if (flags->l)
 		padding = getpadding(entry_list);
 
