@@ -13,10 +13,10 @@ linked_t *list_append(linked_t **head, int type, ...)
 	new = malloc(sizeof(*new));
 	if (!new)
 		return (NULL);
-	new->next = NULL;
 	new->parent = NULL;
 	new->name = NULL;
 	new->entry = NULL;
+	new->next = NULL;
 
 	va_start(args, type);
 	new->name = va_arg(args, char *);
