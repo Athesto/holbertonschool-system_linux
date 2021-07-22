@@ -104,7 +104,6 @@ void get_content_dir(DIR *dir, char *parent, linked_t **entry_list)
 {
 	flag_t *flags = &globals()->flags;
 	struct dirent *entry;
-	linked_t *node;
 	char *name;
 	int isEnable = 0;
 	int counter;
@@ -118,15 +117,6 @@ void get_content_dir(DIR *dir, char *parent, linked_t **entry_list)
 		isEnable |= flags->A && !(!_strcmp(name, ".") || !_strcmp(name, ".."));
 
 		if (isEnable)
-		{
-			node = list_append(entry_list, DIR_ENTRY, entry);
-			if (node)
-			{
-				node->parent = parent;
-				node->name = name;
-			}
-		}
-
+			list_append(entry_list, DIR_ENTRY, name, parent, entry);
 	}
-
 }

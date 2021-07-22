@@ -19,10 +19,12 @@ linked_t *list_append(linked_t **head, int type, ...)
 	new->entry = NULL;
 
 	va_start(args, type);
+	new->name = va_arg(args, char *);
 	if (type == DIR_ENTRY)
+	{
+		new->parent = va_arg(args, char *);
 		new->entry = va_arg(args, struct dirent *);
-	else if (type == ARGS)
-		new->name = va_arg(args, char *);
+	}
 	va_end(args);
 
 
