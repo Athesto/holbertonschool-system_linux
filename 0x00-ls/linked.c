@@ -30,6 +30,7 @@ linked_t *list_append(linked_t **head, int type, ...)
 
 	if (*head == NULL)
 	{
+		new->next = *head;
 		*head = new;
 		return (*head);
 	}
