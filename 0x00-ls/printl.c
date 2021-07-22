@@ -1,5 +1,5 @@
 #include "hls.h"
-#define BUFSIZE 64
+#define BUFSIZE 256
 
 char *getmtime(struct stat mystat);
 void getmode(char *p_mode, char *permissions, struct stat mystat);
