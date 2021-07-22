@@ -15,6 +15,7 @@
 #include <unistd.h> /* readlink */
 
 #define max_t(x, y) (((x) >= (y)) ? (x) : (y))
+#define TOTAL 0
 
 /**
  * struct flag_s - flag structure

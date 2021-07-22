@@ -56,7 +56,7 @@ void print_content(linked_t *dir_list, linked_t *file_list)
 
 		if (*entry_counter > 1 || !(dir_list && !dir_list->next))
 			printf("%s:\n", runner->name);
-		if (0 && flags->l)
+		if (TOTAL && flags->l)
 			printf("total 0\n");
 		print_content_dir(entry_list);
 		list_free(entry_list);
