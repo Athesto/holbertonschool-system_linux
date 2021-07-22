@@ -27,7 +27,7 @@ linked_t *list_append(linked_t **head, int type, ...)
 	}
 	va_end(args);
 
-	if (*head == NULL || _strcmp((*head)->name, new->name) >= 0)
+	if (*head == NULL || _strcmp((*head)->name, new->name) > 0)
 	{
 		new->next = *head;
 		*head = new;
@@ -36,7 +36,7 @@ linked_t *list_append(linked_t **head, int type, ...)
 
 	for (runner = *head; runner->next; runner = runner->next)
 	{
-		if (_strcmp(runner->next->name, new->name) >= 0)
+		if (_strcmp(runner->next->name, new->name) > 0)
 		{
 			new->next = runner->next;
 			break;
