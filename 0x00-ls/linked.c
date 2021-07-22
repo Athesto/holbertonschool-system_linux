@@ -33,10 +33,10 @@ linked_t *list_append(linked_t **head, int type, ...)
 		*head = new;
 		return (*head);
 	}
-	runner = *head;
-	while (runner->next)
+
+	for (runner = *head; runner->next; runner = runner->next)
 	{
-		runner = runner->next;
+		;
 	}
 
 	runner->next = new;
