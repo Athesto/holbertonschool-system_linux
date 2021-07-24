@@ -80,8 +80,9 @@ car_t *car_add(car_t **head, int id)
 	new->lap = 0;
 	new->next = NULL;
 
-	if (*head == NULL)
+	if (*head == NULL || (*head)->id > id)
 	{
+		new->next = *head;
 		*head = new;
 		return (new);
 	}
