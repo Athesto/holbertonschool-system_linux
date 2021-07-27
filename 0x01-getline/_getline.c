@@ -2,7 +2,6 @@
 #include <stdio.h> /* printf */
 #include <string.h> /* strdup */
 #include <stdlib.h> /* realloc */
-char *_strappend(char *dst, char *src);
 
 /**
  * _getline - clone of getline
@@ -41,6 +40,9 @@ char *_getline(const int fd)
 			}
 		}
 		bytes = read(fd, buf, READ_SIZE);
+		if (bytes == -1)
+			return (NULL);
+
 		buf[bytes] = '\0';
 		if (bytes == 0)
 			break;
