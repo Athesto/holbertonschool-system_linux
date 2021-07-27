@@ -16,15 +16,15 @@ char *_getline(const int fd)
 {
 	int i, len_buf, len_dst;
 	static char buf[READ_SIZE];
-	char *dst = NULL, *eol;
+	char *dst = NULL;
 	ssize_t bytes;
 
 	while (1)
 	{
 		if (*buf)
 		{
-			eol = _strchr(buf, '\n');
-			len_buf = eol - buf;
+			for (len_buf = 0; buf[len_buf] && buf[len_buf] != '\n'; len_buf++)
+				;
 			for (len_dst = 0; dst && dst[len_dst]; len_dst++)
 				;
 			dst = realloc(dst, sizeof(*dst) * (len_dst + len_buf + 1));
@@ -46,26 +46,10 @@ char *_getline(const int fd)
 		buf[bytes] = '\0';
 		if (bytes == 0)
 			break;
-		continue;
 	}
 	return (dst);
 }
 
-/**
- * _strchr - search char in string
- * @str: input str
- * @c: searching char
- * Return: pointer to char
- */
-char *_strchr(const char *str, char c)
-{
-	const char *runner;
-
-	for (runner = str; runner && *runner; runner++)
-		if (*runner == c)
-			break;
-	return ((char *)runner);
-}
 
 /**
  * shift - move str from a point
