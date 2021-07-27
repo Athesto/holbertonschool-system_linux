@@ -11,12 +11,14 @@
 /**
  * struct fd_s - struct of file descriptors
  * @fd: searching descriptor
+ * @bytes: number of bytes in the buffer
  * @buf: return buffer
  * @next: next file descriptor's structure
  */
 typedef struct fd_s
 {
 	int fd;
+	ssize_t bytes;
 	char buf[READ_SIZE];
 	struct fd_s *next;
 } fd_t;

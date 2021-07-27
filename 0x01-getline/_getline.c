@@ -11,42 +11,42 @@
  */
 char *_getline(const int fd)
 {
-	int i, len_buf, len_dst;
+	int i, len_buf, len_dst = 0;
 	char *buf, *dst = NULL;
 	fd_t *list;
-	ssize_t bytes;
+	ssize_t *bytes;
 
 	list = linked_get(fd);
 	if (fd == -1 || !list)
 		return (NULL);
-
 	buf = list->buf;
+	bytes = &list->bytes;
 	while (1)
 	{
-		if (*buf)
+		if (*bytes > 0)
 		{
-			for (len_buf = 0; buf[len_buf] && buf[len_buf] != '\n'; len_buf++)
-				;
-			for (len_dst = 0; dst && dst[len_dst]; len_dst++)
-				;
+			len_buf = 0;
+			while (len_buf < *bytes && buf[len_buf] != '\n')
+				len_buf++;
 			dst = realloc(dst, sizeof(*dst) * (len_dst + len_buf + 1));
 			for (i = 0; i < len_buf ; i++)
 				dst[len_dst + i] = buf[i];
 			dst[len_dst + len_buf] = '\0';
+			len_dst += len_buf;
 			shift(buf, buf + len_buf);
-
+			*bytes = *bytes - len_buf;
 			if (*buf == '\n')
 			{
 				shift(buf, buf + 1);
+				*bytes = *bytes - 1;
 				break;
 			}
 		}
-		bytes = read(fd, buf, READ_SIZE);
-		if (bytes == -1)
+		*bytes = read(fd, buf, READ_SIZE);
+		if (*bytes == -1)
 			return (NULL);
-
-		buf[bytes] = '\0';
-		if (bytes == 0)
+		buf[*bytes] = '\0';
+		if (*bytes == 0)
 			break;
 	}
 	return (dst);
@@ -127,6 +127,7 @@ fd_t *linked_add(fd_t **head, const int fd)
 		return (NULL);
 	new->fd = fd;
 	new->next = NULL;
+	new->bytes = 0;
 	memset(new->buf, 0, READ_SIZE);
 
 	if (*head != NULL)
