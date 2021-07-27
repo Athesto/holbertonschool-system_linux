@@ -88,6 +88,7 @@ fd_t *linked_get(const int fd)
 	if (fd == -1)
 	{
 		linked_free(head);
+		head = NULL;
 		return (NULL);
 	}
 
