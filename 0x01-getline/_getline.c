@@ -129,7 +129,7 @@ fd_t *linked_add(fd_t **head, const int fd)
 	new->next = NULL;
 	memset(new->buf, 0, READ_SIZE);
 
-	if (*head == NULL)
+	if (*head != NULL)
 		new->next = *head;
 
 	*head = new;
