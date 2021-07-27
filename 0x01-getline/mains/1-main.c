@@ -15,7 +15,7 @@ int main(void)
 	int fd;
 	char *line;
 
-	fd = open("./results/1a-main", 0);
+	fd = open("mains/results/1-main", 0);
 	while ((line = _getline(fd)))
 	{
 		printf("%s\n", line);

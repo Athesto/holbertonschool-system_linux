@@ -11,8 +11,8 @@ void test_2();
 int main()
 {
 	/* test_2(); */
-	/* test_1(); */
-	test_0();
+	test_1();
+	/* test_0(); */
 
 	return (0);
 }

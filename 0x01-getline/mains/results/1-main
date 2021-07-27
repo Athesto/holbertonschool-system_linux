@@ -15,12 +15,10 @@ int main(void)
 	int fd;
 	char *line;
 
-	fd = open("./results/1a-main", 0);
-	while ((line = _getline(fd)))
-	{
+	fd = open("mains/results/1-main", 0);
+	line = _getline(fd);
 		printf("%s\n", line);
 		free(line);
-	}
 	close(fd);
 	return (0);
 }
