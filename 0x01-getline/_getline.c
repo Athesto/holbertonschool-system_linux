@@ -1,7 +1,4 @@
 #include "_getline.h"
-#include <stdio.h> /* printf */
-#include <string.h> /* strdup */
-#include <stdlib.h> /* realloc */
 
 /**
  * _getline - clone of getline
@@ -15,10 +12,15 @@
 char *_getline(const int fd)
 {
 	int i, len_buf, len_dst;
-	static char buf[READ_SIZE];
-	char *dst = NULL;
+	char *buf, *dst = NULL;
+	fd_t *list;
 	ssize_t bytes;
 
+	list = linked_get(fd);
+	if (fd == -1 || !list)
+		return (NULL);
+
+	buf = list->buf;
 	while (1)
 	{
 		if (*buf)
@@ -72,3 +74,63 @@ char *shift(char *dst, char *src)
 	return (dst);
 }
 
+/**
+ * linked_get - manage file descriptors
+ * @fd: if -1: free all file descriptors, or search fd,
+ * if the fd not found it create it
+ * Return: struct of file descriptor
+ */
+fd_t *linked_get(const int fd)
+{
+	static fd_t *head;
+	fd_t *runner;
+
+	if (fd == -1)
+	{
+		linked_free(head);
+		return (NULL);
+	}
+
+	for (runner = head; runner && runner->fd != fd; runner = runner->next)
+		;
+
+	if (runner == NULL)
+		runner = linked_add(&head, fd);
+
+	return (runner);
+}
+
+/**
+ * linked_free - free linked list
+ * @head: head of linked list
+ */
+void linked_free(fd_t *head)
+{
+	if (head)
+		linked_free(head->next);
+	free(head);
+}
+
+/**
+ * linked_add - add new element into the linked list
+ * @head: reference to the linked list
+ * @fd: file descriptor
+ * Return: new node or null if it FAILS
+ */
+fd_t *linked_add(fd_t **head, const int fd)
+{
+	fd_t *new;
+
+	new = malloc(sizeof(*new));
+	if (!new)
+		return (NULL);
+	new->fd = fd;
+	new->next = NULL;
+	memset(new->buf, 0, READ_SIZE);
+
+	if (*head == NULL)
+		new->next = *head;
+
+	*head = new;
+	return (new);
+}
