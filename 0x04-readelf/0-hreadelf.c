@@ -25,8 +25,7 @@ int main(int argc, char *argv[])
 	file = fopen(argv[1], "r");
 	if (!file)
 	{
-		fprintf(stderr, "readelf: Error: '%s': ", argv[1]);
-		perror("");
+		fprintf(stderr, "readelf: Error: '%s': No such file\n", argv[1]);
 		return (1);
 	}
 	fread(&header, sizeof(header), 1, file);
