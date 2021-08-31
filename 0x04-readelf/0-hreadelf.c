@@ -23,6 +23,12 @@ int main(int argc, char *argv[])
 	}
 	memset(&header, 0, sizeof(header));
 	file = fopen(argv[1], "r");
+	if (!file)
+	{
+		fprintf(stderr, "readelf: Error: '%s': ", argv[1]);
+		perror("");
+		return (1);
+	}
 	fread(&header, sizeof(header), 1, file);
 	fclose(file);
 
