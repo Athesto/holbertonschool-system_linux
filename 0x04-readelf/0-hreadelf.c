@@ -2,7 +2,7 @@
 #include <string.h>
 #include <elf.h>
 
-static void print_format1(Elf64_Ehdr *ptr);
+static void print_format(Elf64_Ehdr *ptr);
 
 /**
  * main - displays the information contained in the ELF file header.
@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
 {
 	Elf64_Ehdr header;
 	FILE *file;
+	unsigned char magic[4] = {0x7f, 0x45, 0x4c, 0x46};
 
 
 	if (argc != 2)
@@ -31,17 +32,24 @@ int main(int argc, char *argv[])
 	fread(&header, sizeof(header), 1, file);
 	fclose(file);
 
-	print_format1(&header);
+	if (memcmp(header.e_ident, magic, 4))
+	{
+		fprintf(stderr, "readelf: Error: %s: ", argv[1]);
+		fprintf(stderr, "Failed to read file header\n");
+		return (1);
+	}
+
+	print_format(&header);
 
 	return (0);
 }
 
 
 /**
- * print_format1 - print format
+ * print_format - print format
  * @ptr: poiner to element
  */
-static void print_format1(Elf64_Ehdr *ptr)
+static void print_format(Elf64_Ehdr *ptr)
 {
 	char *tmp;
 	int i, byte;
