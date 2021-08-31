@@ -34,8 +34,8 @@ int main(int argc, char *argv[])
 
 	if (memcmp(header.e_ident, magic, 4))
 	{
-		fprintf(stderr, "readelf: Error: %s: ", argv[1]);
-		fprintf(stderr, "Failed to read file header\n");
+		fprintf(stderr, "readelf: Error: Not an ELF file - ");
+		fprintf(stderr, "it has the wrong magic bytes at the start\n");
 		return (1);
 	}
 
