@@ -1,8 +1,11 @@
+#include "0-hreadelf.h"
 #include <stdio.h> /* fprintf fopen */
 #include <string.h>
-#include <elf.h>
 
-static void print_format(Elf64_Ehdr *ptr);
+static void print_format(output_t *ptr);
+
+int readfile(header_t *header, char *filename);
+int getoutput(output_t *output, header_t *header);
 
 /**
  * main - displays the information contained in the ELF file header.
@@ -12,8 +15,8 @@ static void print_format(Elf64_Ehdr *ptr);
  */
 int main(int argc, char *argv[])
 {
-	Elf64_Ehdr header;
-	FILE *file;
+	header_t header;
+	output_t output;
 	unsigned char magic[4] = {0x7f, 0x45, 0x4c, 0x46};
 
 
@@ -22,34 +25,101 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Usage: %s elf_filename\n", argv[0]);
 		return (1);
 	}
-	memset(&header, 0, sizeof(header));
-	file = fopen(argv[1], "r");
-	if (!file)
-	{
-		fprintf(stderr, "readelf: Error: '%s': No such file\n", argv[1]);
-		return (1);
-	}
-	fread(&header, sizeof(header), 1, file);
-	fclose(file);
 
-	if (memcmp(header.e_ident, magic, 4))
+	if (readfile(&header, argv[1]))
+		return (1);
+
+
+
+	if (memcmp(header.h64.e_ident, magic, 4))
 	{
 		fprintf(stderr, "readelf: Error: Not an ELF file - ");
 		fprintf(stderr, "it has the wrong magic bytes at the start\n");
 		return (1);
 	}
 
-	print_format(&header);
+	getoutput(&output, &header);
+
+	print_format(&output);
 
 	return (0);
 }
+/**
+ * readfile - read file and fill the header
+ * @header: union of header
+ * @filename: string with path
+ * Return: 0 OK, Otherwise Failure
+ */
+int readfile(header_t *header, char *filename)
+{
+	FILE *file;
 
+	file = fopen(filename, "r");
+	if (!file)
+	{
+		fprintf(stderr, "readelf: Error: '%s': No such file\n", filename);
+		return (1);
+	}
+	fread(header, sizeof(*header), 1, file);
+	fclose(file);
+	return (0);
+}
+
+/**
+ * getoutput - get output format
+ * @output: destiny
+ * @header: input union
+ * Return: 0 Success, Otherwise failure
+ */
+int getoutput(output_t *output, header_t *header)
+{
+	if (header->h64.e_ident[EI_CLASS] == ELFCLASS64)
+	{
+		output->e_ident = header->h64.e_ident;
+		output->e_type = header->h64.e_type;
+		output->e_machine = header->h64.e_machine;
+		output->e_version = header->h64.e_version;
+		output->e_entry = header->h64.e_entry;
+		output->e_phoff = header->h64.e_phoff;
+		output->e_shoff = header->h64.e_shoff;
+		output->e_flags = header->h64.e_flags;
+		output->e_ehsize = header->h64.e_ehsize;
+		output->e_phentsize = header->h64.e_phentsize;
+		output->e_phnum = header->h64.e_phnum;
+		output->e_shentsize = header->h64.e_shentsize;
+		output->e_shnum = header->h64.e_shnum;
+		output->e_shstrndx = header->h64.e_shstrndx;
+	}
+	else if (header->h64.e_ident[EI_CLASS] == ELFCLASS32)
+	{
+		output->e_ident = header->h32.e_ident;
+		output->e_type = header->h32.e_type;
+		output->e_machine = header->h32.e_machine;
+		output->e_version = header->h32.e_version;
+		output->e_entry = header->h32.e_entry;
+		output->e_phoff = header->h32.e_phoff;
+		output->e_shoff = header->h32.e_shoff;
+		output->e_flags = header->h32.e_flags;
+		output->e_ehsize = header->h32.e_ehsize;
+		output->e_phentsize = header->h32.e_phentsize;
+		output->e_phnum = header->h32.e_phnum;
+		output->e_shentsize = header->h32.e_shentsize;
+		output->e_shnum = header->h32.e_shnum;
+		output->e_shstrndx = header->h32.e_shstrndx;
+	}
+	else
+	{
+		memset(output, 0, sizeof(*output));
+		return (1);
+	}
+	return (0);
+}
 
 /**
  * print_format - print format
  * @ptr: poiner to element
  */
-static void print_format(Elf64_Ehdr *ptr)
+static void print_format(output_t *ptr)
 {
 	char *tmp;
 	int i, byte;
@@ -71,6 +141,7 @@ static void print_format(Elf64_Ehdr *ptr)
 		"Advanced Micro Devices X86-64",
 		"Intel 80386",
 		"Sparc",
+		"ARM",
 	};
 
 	puts("ELF Header:");
@@ -111,11 +182,13 @@ static void print_format(Elf64_Ehdr *ptr)
 		tmp = machine[1];
 	else if (byte == EM_386)
 		tmp = machine[2];
+	else if (byte == EM_ARM)
+		tmp = machine[4];
 	else
 		tmp = machine[3];
 	printf("  %-35s%s\n", "Machine:", tmp);
 	printf("  %-35s0x%x\n", "Version:", ptr->e_version);
-	printf("  %-35s%p\n", "Entry point address:", (void *)ptr->e_entry);
+	printf("  %-35s0x%lx\n", "Entry point address:", ptr->e_entry);
 	printf("  %-35s%d ", "Start of program headers:", (int)ptr->e_phoff);
 	printf("(bytes into file)\n");
 	printf("  %-35s%d ", "Start of section headers:", (int)ptr->e_shoff);
@@ -130,4 +203,5 @@ static void print_format(Elf64_Ehdr *ptr)
 	printf("  %-35s%d\n", "Number of section headers:", ptr->e_shnum);
 	printf("  %-35s", "Section header string table index:");
 	printf("%d\n", ptr->e_shstrndx);
+
 }

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-INPUT=0-hreadelf
-make -B 0-hreadelf && ./${INPUT} ${INPUT} | cat -e > /tmp/a
-readelf -W -h ./${INPUT} | cat -e > /tmp/b
+INPUT=${1-0-hreadelf}
+# make -B 0-hreadelf && ./0-hreadelf "${INPUT}" | cat -e > /tmp/a || exit
+# readelf -W -h "${INPUT}" | cat -e > /tmp/b || exit
 colordiff -y -W 200 /tmp/{a,b}
