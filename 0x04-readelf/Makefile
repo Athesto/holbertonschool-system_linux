@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-g -Wall -Werror -Wextra -pedantic -std=gnu90
+CFLAGS=-g3 -Wall -Werror -Wextra -pedantic -std=gnu90
 
 0-hreadelf:
 	@rm -rf "$${OUT}"

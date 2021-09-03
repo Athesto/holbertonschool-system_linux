@@ -143,6 +143,12 @@ static void print_format(output_t *ptr)
 		"Sparc",
 		"ARM",
 	};
+	char *osiabis[] = {
+		"UNIX - System V",
+		"UNIX - Linux",
+		"UNIX - NetBSD",
+		"UNIX - Solaris"
+	};
 
 	puts("ELF Header:");
 
@@ -166,11 +172,13 @@ static void print_format(output_t *ptr)
 
 	byte = ptr->e_ident[EI_OSABI];
 	if (byte == ELFOSABI_NETBSD)
-		tmp = "UNIX - NetBSD";
+		tmp = osiabis[1];
 	else if (byte == ELFOSABI_LINUX)
-		tmp = "UNIX - Linux";
+		tmp = osiabis[2];
+	else if (byte == ELFOSABI_SOLARIS)
+		tmp = osiabis[3];
 	else
-		tmp = "UNIX - System V";
+		tmp = osiabis[0];
 	printf("  %-35s%s\n", "OS/ABI:", tmp);
 	printf("  %-35s%d\n", "ABI Version:", ptr->e_ident[EI_ABIVERSION]);
 
