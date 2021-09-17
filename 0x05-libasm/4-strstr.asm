@@ -37,7 +37,7 @@ break_loop_len_output:
 ; end len_output
 
 loop_cmp_lens:
-        cmp R8D, R9D              ; l1, l2
+        cmp R8, R9                ; l1, l2
         jb ret_zero               ; l1 < l2 -> ret_zero
         dec r8
 ; ;R10 = memcmp(cs, ct, count)
@@ -46,7 +46,7 @@ loop_cmp_lens:
         mov R13, RAX              ; su1 = cs
         mov R14, RBX              ; su2 = ct
 loop_memcmp:
-        cmp R11D, 0
+        cmp R11, 0
         jl finish_memcmp          ; count < 0
         mov R12B, byte [R13]      ; res = *su1
         sub R12B, byte [R14]      ; res -= *su2
