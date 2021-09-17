@@ -4,7 +4,6 @@ asm_strcmp:
         push RBP
         mov RAX, 0                ; char of string1
         mov RBX, 0                ; char of string2
-        mov RCX, 0                ; diff of a and b
         mov RDX, 0                ; counter of stings
 
 loop:
@@ -15,7 +14,7 @@ loop:
         jb ret_minus1
         ja ret_plus1
         cmp AL, 0
-        jnz ret_zero
+        jz ret_zero
         jmp loop
 
 ret_plus1:
