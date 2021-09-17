@@ -38,7 +38,7 @@ break_loop_len_output:
 
 loop_cmp_lens:
         cmp R8, R9                ; l1, l2
-        jb ret_zero               ; l1 < l2 -> ret_zero
+        jl ret_zero               ; l1 < l2 -> ret_zero
         dec r8
 ; ;R10 = memcmp(cs, ct, count)
         mov R11, R9               ; count = l2
