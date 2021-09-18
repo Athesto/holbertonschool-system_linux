@@ -47,7 +47,7 @@ loop_cmp_lens:
         mov R14, RBX              ; su2 = ct
 loop_memcmp:
         cmp R11, 0
-        jl finish_memcmp          ; count < 0
+        jle finish_memcmp         ; count < 0
         mov R12B, byte [R13]      ; res = *su1
         sub R12B, byte [R14]      ; res -= *su2
         cmp R12, 0
