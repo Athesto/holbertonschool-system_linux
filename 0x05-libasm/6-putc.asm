@@ -2,8 +2,7 @@
 
 asm_putc:
         push RBP                  ; save Base pointer
-        push RAX                  ; save previous RAX
-        push RDX                  ; save previous RDX
+        push RDI
         mov RBP, RSP              ; save Stack pointer
 
         mov byte [RSP], DIL       ; load input
@@ -15,7 +14,6 @@ write:
         syscall
 
         mov RSP, RBP              ; restore previous Stack pointer
-        pop RDX                   ; restore previous RDX
-        pop RAX                   ; restore previous RAX
+        pop RDI
         pop RBP                   ; restore previous Base pointer
         ret
